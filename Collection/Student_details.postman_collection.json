@@ -1,0 +1,330 @@
+{
+	"info": {
+		"_postman_id": "992f5909-26cb-4314-83c8-f45bfaf420b8",
+		"name": "Student_details",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41463947"
+	},
+	"item": [
+		{
+			"name": "Student_list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"console.log(\"Response Length:\", jsonData.length)\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/studentsDetails",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"pm.environment.set(\"Id\",jsonData.id)\r",
+							"pm.test(\"status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201)\r",
+							"\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"first_name\": \"Kazi Mostafa \",\r\n  \"middle_name\": \"Moymim\",\r\n  \"last_name\": \"Auntu \",\r\n  \"date_of_birth\": \"06-12-1999\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/studentsDetails",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Specificstudent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var response = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ID is correct\", function () {\r",
+							"    pm.expect(response.data.id).to.eql(pm.environment.get(\"Id\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"First Name is correct\", function () {\r",
+							"    pm.expect(response.data.first_name).to.eql(\"Kazi Mostafa \");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Middle Name is correct\", function () {\r",
+							"    pm.expect(response.data.middle_name).to.eql(\"Moymim\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Last Name is correct\", function () {\r",
+							"    pm.expect(response.data.last_name).to.eql(\"Auntu \");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Date of Birth is correct\", function () {\r",
+							"    pm.expect(response.data.date_of_birth).to.eql(\"06-12-1999\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/studentsDetails/{{Id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"{{Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Technical_skills",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200)\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": {{Id}},\r\n  \"language\": [\r\n    \"Bangla\",\r\n    \"English\"\r\n  ],\r\n  \"yearexp\": \"2\",\r\n  \"lastused\": \"20-03-2025\",\r\n  \"st_id\": 526716\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/technicalskills",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"technicalskills"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_student_address",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"var statusCode = pm.response.code\r",
+							"if (statusCode === 200) {\r",
+							"    \r",
+							"    pm.test(\"Response 'status' field is true\", function () {\r",
+							"    pm.expect(JSON.parse(jsonData.status)).to.eql(true)\r",
+							"})\r",
+							"pm.test(\"Status code is 200\")\r",
+							"pm.test(\"Message is 'Add  data success'\", function () {\r",
+							"    pm.expect(jsonData.msg).to.eql(\"Add  data success\")\r",
+							"})}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Permanent_Address\": {\r\n    \"House_Number\": \"33\",\r\n    \"City\": \"Dhaka\",\r\n    \"State\": \"Dhaka\",\r\n    \"Country\": \"Bangladesh\",\r\n    \"PhoneNumber\": [\r\n      {\r\n        \"Std_Code\": \"1216\",\r\n        \"Home\": \"House-33\",\r\n        \"Mobile\": \"+8801886644261\"\r\n      },\r\n      {\r\n        \"Std_Code\": \"1216\",\r\n        \"Home\": \"House-33\",\r\n        \"Mobile\": \"+8801521332111\"\r\n      }\r\n    ]\r\n  },\r\n  \"stId\": 526716\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/addresses",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "final_student_Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var  jsondata = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"/*\r",
+							"pm.test(\"Language includes Bangla and English\", function () {\r",
+							"    pm.expect(jsondata.data.TechnicalDetails[0].language).to.eql([\"Bangla\", \"English\"])\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Year of experience is 2\", function () {\r",
+							"    pm.expect(response.data.TechnicalDetails[0].yearexp).to.eql(\"2\")\r",
+							"}) \r",
+							"\r",
+							"pm.test(\"House Number is 33\", function () {\r",
+							"    pm.expect(response.data.Address[0].Permanent_Address.House_Number).to.eql(\"33\")\r",
+							"})\r",
+							"\r",
+							"pm.test(\"City is Dhaka\", function () {\r",
+							"    pm.expect(response.data.Address[0].Permanent_Address.City).to.eql(\"Dhaka\")\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Country is Bangladesh\", function () {\r",
+							"    pm.expect(response.data.Address[0].Permanent_Address.Country).to.eql(\"Bangladesh\")\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Mobile numbers are correct\", function () {\r",
+							"    let mobiles = response.data.Address[0].Permanent_Address.PhoneNumber.map(p => p.Mobile);\r",
+							"    pm.expect(mobiles).to.include(\"+8801886644261\");\r",
+							"    pm.expect(mobiles).to.include(\"+8801521332111\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Current Address is null\", function () {\r",
+							"    pm.expect(response.data.Address[0].Current_Address).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"State is Dhaka\", function () {\r",
+							"    pm.expect(response.data.Address[0].Permanent_Address.State).to.eql(\"Dhaka\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Std_Code is 1216 for all entries\", function () {\r",
+							"    response.data.Address[0].Permanent_Address.PhoneNumber.forEach(function (phone) {\r",
+							"        pm.expect(phone.Std_Code).to.eql(\"1216\");\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Home field is House-33 for all entries\", function () {\r",
+							"    response.data.Address[0].Permanent_Address.PhoneNumber.forEach(function (phone) {\r",
+							"        pm.expect(phone.Home).to.eql(\"House-33\")\r",
+							"    })\r",
+							"})\r",
+							"*/\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/FinalStudentDetails/{{Id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"FinalStudentDetails",
+						"{{Id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
